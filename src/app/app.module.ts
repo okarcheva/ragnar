@@ -4,6 +4,7 @@ import { ActionsModule } from 'app/actions/actions.module';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/components/app.component';
 import { HomeModule } from 'app/components/home/home.module';
+import { TodolistModule } from 'app/components/todolist/todolist.module'; 
 import { RepositoriesModule } from 'app/repositories/repositories.module';
 import { ServicesModule } from 'app/services/services.module';
 import { StoreModule } from 'app/store/store.module';
@@ -23,7 +24,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ActionsModule,
     StoreModule,
     ServicesModule,
-    RepositoriesModule
+    RepositoriesModule,
+    TodolistModule
   ],
   providers: [],
   bootstrap: [AppComponent]
