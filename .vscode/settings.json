@@ -23,6 +23,7 @@
     "Inflights",
     "Resizer",
     "containerless",
+    "injectable",
     "pannable",
     "sasslintrc",
     "simplebar",

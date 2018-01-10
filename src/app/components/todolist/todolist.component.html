@@ -1,1 +1,16 @@
-<span>{{test}}</span>
+<h1>ToDo List</h1>
+
+<input 
+  type="text"
+  placeholder="Add item.."
+  [(ngModel)]="newItem$.description"
+>
+<button 
+  (click)="addButtonClicked()"
+>
+Add
+</button>
+
+<todolist-item *ngFor="let todoItem of todoList$ | async"
+  [todolistItem]="todoItem"
+></todolist-item>
