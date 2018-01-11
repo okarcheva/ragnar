@@ -1,16 +1,35 @@
-<h1>ToDo List</h1>
+<div class="todolist">
+  <h1 class="todolist__header">
+    ToDo List
+  </h1>
 
-<input 
-  type="text"
-  placeholder="Add item.."
-  [(ngModel)]="newItem$.description"
->
-<button 
-  (click)="addButtonClicked()"
->
-Add
-</button>
+  <div class="todolist__input-container">
+    <input 
+      type="text"
+      placeholder="Add item.."
+      class="todolist__input"
+      [(ngModel)]="description"
+      (input)="inputValueChanged()"
+    >
+    <button 
+      class="todolist__add-button"
+      (click)="addButtonClicked()"
+      [disabled]="description === ''"
+    >
+      Add
+    </button>
+  </div>
 
-<todolist-item *ngFor="let todoItem of todoList$ | async"
-  [todolistItem]="todoItem"
-></todolist-item>
+
+  <div
+    class="todolist__items-container">
+    <todolist-item 
+      *ngFor="let todoItem of todoList$ | async"
+      class="todolist__item"
+      [todolistItem]="todoItem"
+      [onCheckboxChange]="checkboxValueChanged"
+      [onCloseIconClick]="itemCloseIconClicked"
+    ></todolist-item>
+  </div>
+</div>
+

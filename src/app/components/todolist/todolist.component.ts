@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AddButtonClickedAction } from 'app/actions/todolist/add-button-clicked-action';
+import { CheckboxValueChangedAction } from 'app/actions/todolist/checkbox-value-changed.action';
+import { InputValueChangedAction } from 'app/actions/todolist/input-value-changed.action';
+import { ItemCloseIconClickedAction } from 'app/actions/todolist/item-close-icon-clicked.action';
 import { TodolistItem } from 'app/components/todolist/todolist-item.component/todolist-item';
 import { Store } from 'app/store/store';
 import { Observable } from 'rxjs/Observable';
@@ -11,22 +15,14 @@ import { Observable } from 'rxjs/Observable';
 export class TodolistComponent {
   todoList$: Observable<TodolistItem[]>;
   newItem$: Observable<TodolistItem>;
-  // todoList: TodolistItem[] = [{
-  //   description: 'Read a book',
-  //   isChecked: true
-  // }, {
-  //   description: 'Go to dentist',
-  //   isChecked: false
-  // }];
-
-  // newItem: TodolistItem = {
-  //   description: '',
-  //   isChecked: false
-  // };
+  description: string = '';
 
   constructor(
     store: Store,
-    addButtonClickedAction: AddButtonClickedAction
+    private addButtonClickedAction: AddButtonClickedAction,
+    private inputValueChangedAction: InputValueChangedAction,
+    private checkboxValueChangedAction: CheckboxValueChangedAction,
+    private itemCloseIconClickedAction: ItemCloseIconClickedAction
   ) { 
     const todolist = store.todolistStore;
 
@@ -34,8 +30,21 @@ export class TodolistComponent {
     this.newItem$ = todolist.newItem$;
   }
 
-  addButtonClicked() {
+  addButtonClicked() {    
+    this.addButtonClickedAction.execute();
+    this.description = '';
+  }
 
+  inputValueChanged() {
+    this.inputValueChangedAction.execute(this.description);
+  }
+
+  checkboxValueChanged = (item: TodolistItem) => {
+    this.checkboxValueChangedAction.execute(item);
+  }
+
+  itemCloseIconClicked = (item: TodolistItem) => {
+    this.itemCloseIconClickedAction.execute(item);
   }
 
 }

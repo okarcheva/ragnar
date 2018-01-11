@@ -1,6 +1,22 @@
-<div>
-  <input 
-    type="checkbox"
-    [checked]="todolistItem.isChecked">
-  <span>{{todolistItem.description}}</span>
+<div class="todolistitem">
+  <div class="todolistitem__item-container">
+    <input 
+      type="checkbox"
+      class="todolistitem__checkbox"
+      [checked]="todolistItem.isChecked"
+      (change)="checkboxValueChanged()"
+    >
+    <span
+      class="todolistitem__description"
+    >
+      {{todolistItem.description}}
+    </span>
+  </div>
+
+  <span 
+    class="todolistitem__close-icon"
+    (click)="closeIconClicked()"
+  >
+      &#10006;
+  </span>
 </div>

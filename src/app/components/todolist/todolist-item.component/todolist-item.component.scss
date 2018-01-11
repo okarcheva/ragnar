@@ -1,0 +1,26 @@
+@import "../../../../sass/_variables.scss";
+
+.todolistitem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 24px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.todolistitem__item-container {
+    display: flex;
+    align-items: center;
+}
+
+.todolistitem__checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+.todolistitem__close-icon {
+    cursor: pointer;
+}

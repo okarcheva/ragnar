@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TodolistItem } from 'app/components/todolist/todolist-item.component/todolist-item';
 
 @Component({
@@ -6,16 +6,25 @@ import { TodolistItem } from 'app/components/todolist/todolist-item.component/to
   templateUrl: './todolist-item.component.html',
   styleUrls: ['./todolist-item.component.scss']
 })
-export class TodolistItemComponent implements OnInit {
+export class TodolistItemComponent {
 
-  @Input() todolistItem: TodolistItem = {
-    description: 'test description',
-    isChecked: true
-  };
+  @Input() todolistItem: TodolistItem;
+  @Input() onCheckboxChange: (changedItem: TodolistItem) => void;
+  @Input() onCloseIconClick: (removedItem: TodolistItem) => void;
 
   constructor() { }
 
-  ngOnInit() {
+  checkboxValueChanged() {
+    this.todolistItem.isChecked = !this.todolistItem.isChecked;
+    if (typeof this.onCheckboxChange === 'function') {
+      this.onCheckboxChange(this.todolistItem);
+    }
+  }
+
+  closeIconClicked() {
+    if (typeof this.onCloseIconClick === 'function') {
+      this.onCloseIconClick(this.todolistItem);
+    }
   }
 
 }

@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
 import { IAction } from 'app/actions/i-action';
-import { ValuesRepository } from 'app/repositories/values.repository';
 import { Store } from 'app/store/store';
 
 @Injectable()
 export class AddButtonClickedAction implements IAction {
   constructor(
-    private store: Store,
-    private valuesRepository: ValuesRepository
+    private store: Store
   ) {}
 
   async execute() {
-    const value = await this.valuesRepository.getData();
-    this.store.homeStore.serverCounter$.next(value);
+    const todolistStore = this.store.todolistStore;
+    const newIdCounter = todolistStore.idCounter$.getValue() + 1;
+    todolistStore.idCounter$.next(newIdCounter);
+
+    todolistStore.todolist$.next(
+      todolistStore.todolist$.getValue()
+      .concat(this.store.todolistStore.newItem$.getValue())
+    );
+    todolistStore.newItem$.next({
+      id: newIdCounter,
+      description: '',
+      isChecked: false
+    });
   }
 }

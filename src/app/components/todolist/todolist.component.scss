@@ -1,0 +1,42 @@
+@import "../../../sass/_variables.scss";
+
+.todolist {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.todolist__header {
+    text-align: center;
+}
+
+.todolist__input-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.todolist__input {
+    width: 100%;
+    margin-right: 8px;
+    padding: 0 8px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.todolist__add-button {
+    width: 100px;
+    font-size: 16px;
+}
+
+.todolist__items-container {
+    background: $a-color-gray-n1;
+}
+
+.todolist__item {
+    display: block;
+    &:not(:last-child) {
+        border-bottom: 1px solid $a-color-gray-n2;
+    }
+}
+
