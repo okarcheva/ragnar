@@ -11,6 +11,8 @@ export class AddButtonClickedAction implements IAction {
   async execute() {
     const todolistStore = this.store.todolistStore;
     const newIdCounter = todolistStore.idCounter$.getValue() + 1;
+
+    todolistStore.newItem$.getValue().id = newIdCounter;
     todolistStore.idCounter$.next(newIdCounter);
 
     todolistStore.todolist$.next(
@@ -18,7 +20,7 @@ export class AddButtonClickedAction implements IAction {
       .concat(this.store.todolistStore.newItem$.getValue())
     );
     todolistStore.newItem$.next({
-      id: newIdCounter,
+      id: 0,
       description: '',
       isChecked: false
     });
