@@ -24,19 +24,27 @@
     line-height: 24px;
 }
 
-.todolist__add-button {
-    width: 100px;
+.todolist__button {
+    height: 28px;
+    padding: 0 16px;
     font-size: 16px;
 }
 
 .todolist__items-container {
     background: $a-color-gray-n1;
+    margin-bottom: 24px;
 }
 
 .todolist__item {
     display: block;
+
     &:not(:last-child) {
         border-bottom: 1px solid $a-color-gray-n2;
     }
+}
+
+.todolist__buttons-container {
+    display: flex;
+    justify-content: space-between;
 }
 

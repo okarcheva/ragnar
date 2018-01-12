@@ -16,8 +16,25 @@ export class CheckboxValueChangedAction implements IDataAction<TodolistItem> {
       todoItem => todoItem.id === item.id);
     if (changedItem) {
       changedItem.isChecked = item.isChecked;
-    }    
+    }
 
-    todolistStore.todolist$.next(todolistStore.todolist$.getValue());
+    const isClearCompletedDisabled = this.getIsClearCompletedDisabled(
+      item,
+      todolistStore.todolist$.getValue()
+    );
+
+    todolistStore.isClearCompletedDisabled$.next(isClearCompletedDisabled);
+  }
+
+  getIsClearCompletedDisabled(item: TodolistItem, todolist: TodolistItem[]): boolean {
+    let isClearCompletedDisabled = true;
+
+    if (item.isChecked) {
+      isClearCompletedDisabled = false;
+    } else if (todolist.filter(todolistItem => todolistItem.isChecked).length > 0) {
+      isClearCompletedDisabled = false;
+    }
+    
+    return isClearCompletedDisabled;
   }
 }

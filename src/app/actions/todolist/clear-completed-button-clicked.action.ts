@@ -5,40 +5,32 @@ import { TodolistItem } from 'app/components/todolist/todolist-item.component/to
 import { Store } from 'app/store/store';
 
 @Injectable()
-export class AddButtonClickedAction implements IAction {
+export class ClearCompletedButtonClickedAction implements IAction {
   constructor(
     private store: Store
   ) {}
 
   async execute() {
     const todolistStore = this.store.todolistStore;
-    const newIdCounter = todolistStore.idCounter$.getValue() + 1;
     const filterValue = todolistStore.filterValue$.getValue();
 
-    todolistStore.newItem$.getValue().id = newIdCounter;
-
-    todolistStore.idCounter$.next(newIdCounter);
-
     todolistStore.todolist$.next(
-      todolistStore.todolist$.getValue()
-      .concat(this.store.todolistStore.newItem$.getValue()
-    ));
+      todolistStore.todolist$.getValue().filter(
+        item => !item.isChecked
+      )
+    );
 
     todolistStore.todoListFiltered$.next(
       todolistStore.todolist$.getValue().filter(
         item => { return this.filterTodolist(filterValue, item); }
     ));
 
-    todolistStore.newItem$.next({
-      id: 0,
-      description: '',
-      isChecked: false
-    });
+    todolistStore.isClearCompletedDisabled$.next(true);
   }
 
   filterTodolist(filterValue: TodolistFilter, todolistItem: TodolistItem) {
     if (filterValue === TodolistFilter.Active) {
-      return todolistItem.isChecked;
+      return !todolistItem.isChecked;
     } else if (filterValue === TodolistFilter.Completed) {
       return todolistItem.isChecked;
     }
