@@ -1,5 +1,5 @@
 import { HomeStore } from 'app/store/home/home-store';
-import { TodolistStore } from 'app/store/home/todolist-store';
+import { TodolistStore } from 'app/store/todolist/todolist-store';
 
 export class Store {
   private _homeStore = new HomeStore();

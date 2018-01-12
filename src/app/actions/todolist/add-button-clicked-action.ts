@@ -1,39 +1,35 @@
 import { Injectable } from '@angular/core';
-import { IAction } from 'app/actions/i-action';
+import { IDataAction } from 'app/actions/i-data-action';
 import { TodolistFilter } from 'app/components/todolist/todolist-enums';
 import { TodolistItem } from 'app/components/todolist/todolist-item.component/todolist-item';
 import { Store } from 'app/store/store';
 
 @Injectable()
-export class AddButtonClickedAction implements IAction {
+export class AddButtonClickedAction implements IDataAction<string> {
   constructor(
     private store: Store
   ) {}
 
-  async execute() {
+  async execute(description: string) {
     const todolistStore = this.store.todolistStore;
     const newIdCounter = todolistStore.idCounter$.getValue() + 1;
     const filterValue = todolistStore.filterValue$.getValue();
 
-    todolistStore.newItem$.getValue().id = newIdCounter;
+    const newItem: TodolistItem = {
+      id: newIdCounter,
+      description: description,
+      isChecked: false
+    };
 
     todolistStore.idCounter$.next(newIdCounter);
 
     todolistStore.todolist$.next(
-      todolistStore.todolist$.getValue()
-      .concat(this.store.todolistStore.newItem$.getValue()
-    ));
+      todolistStore.todolist$.getValue().concat(newItem));
 
     todolistStore.todoListFiltered$.next(
       todolistStore.todolist$.getValue().filter(
         item => { return this.filterTodolist(filterValue, item); }
     ));
-
-    todolistStore.newItem$.next({
-      id: 0,
-      description: '',
-      isChecked: false
-    });
   }
 
   filterTodolist(filterValue: TodolistFilter, todolistItem: TodolistItem) {

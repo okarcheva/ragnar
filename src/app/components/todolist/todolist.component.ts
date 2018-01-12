@@ -5,7 +5,6 @@ import { AllFilterClickedAction } from 'app/actions/todolist/all-filter-clicked.
 import { CheckboxValueChangedAction } from 'app/actions/todolist/checkbox-value-changed.action';
 import { ClearCompletedButtonClickedAction } from 'app/actions/todolist/clear-completed-button-clicked.action';
 import { CompletedFilterClickedAction } from 'app/actions/todolist/completed-filter-clicked.action';
-import { InputValueChangedAction } from 'app/actions/todolist/input-value-changed.action';
 import { ItemCloseIconClickedAction } from 'app/actions/todolist/item-close-icon-clicked.action';
 import { TodolistItem } from 'app/components/todolist/todolist-item.component/todolist-item';
 import { Store } from 'app/store/store';
@@ -27,7 +26,6 @@ export class TodolistComponent {
   constructor(
     store: Store,
     private addButtonClickedAction: AddButtonClickedAction,
-    private inputValueChangedAction: InputValueChangedAction,
     private checkboxValueChangedAction: CheckboxValueChangedAction,
     private itemCloseIconClickedAction: ItemCloseIconClickedAction,
     private activeFilterClickedAction: ActiveFilterClickedAction,
@@ -45,12 +43,8 @@ export class TodolistComponent {
   }
 
   addButtonClicked() {    
-    this.addButtonClickedAction.execute();
+    this.addButtonClickedAction.execute(this.description);
     this.description = '';
-  }
-
-  inputValueChanged() {
-    this.inputValueChangedAction.execute(this.description);
   }
 
   checkboxValueChanged = (item: TodolistItem) => {

@@ -13,15 +13,6 @@ export class TodolistStore {
     return this._todoListFiltered$;
   }
 
-  private _newItem$ = new BehaviorSubject<TodolistItem>({
-    id: 0,
-    description: '',
-    isChecked: false
-  });  
-  get newItem$() {
-    return this._newItem$;
-  }
-
   private _idCounter$ = new BehaviorSubject<number>(0);  
   get idCounter$() {
     return this._idCounter$;

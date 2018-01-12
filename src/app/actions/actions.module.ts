@@ -7,7 +7,6 @@ import { AllFilterClickedAction } from 'app/actions/todolist/all-filter-clicked.
 import { CheckboxValueChangedAction } from 'app/actions/todolist/checkbox-value-changed.action';
 import { ClearCompletedButtonClickedAction } from 'app/actions/todolist/clear-completed-button-clicked.action';
 import { CompletedFilterClickedAction } from 'app/actions/todolist/completed-filter-clicked.action';
-import { InputValueChangedAction } from 'app/actions/todolist/input-value-changed.action';
 import { ItemCloseIconClickedAction } from 'app/actions/todolist/item-close-icon-clicked.action';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { ItemCloseIconClickedAction } from 'app/actions/todolist/item-close-icon
     HomeUpdatedAction,
     HomeServerUpdatedAction,
     AddButtonClickedAction,
-    InputValueChangedAction,
     CheckboxValueChangedAction,
     ItemCloseIconClickedAction,
     ActiveFilterClickedAction,
