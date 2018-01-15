@@ -13,7 +13,7 @@
     <button 
       class="todolist__button"
       (click)="addButtonClicked()"
-      [disabled]="description === ''"
+      [disabled]="isAddDisabled"
     >
       Add
     </button>
