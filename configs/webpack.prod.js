@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const SassLintPlugin = require('sasslint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const commonConfig = require('./webpack.common.js');
 const helpers = require('./helpers');
 
@@ -19,11 +20,8 @@ module.exports = webpackMerge(commonConfig, {
 
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      // https://github.com/angular/angular/issues/10618
-      mangle: {
-        keep_fnames: true
-      }
+    new UglifyJsPlugin({
+      sourceMap: true
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -35,23 +33,22 @@ module.exports = webpackMerge(commonConfig, {
         minimize: false // workaround for ng2
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['app', 'vendor', 'polyfills']
-    }),
     new SassLintPlugin({
       configFile: '.sasslintrc',
       failOnError: true,
       failOnWarning: true
     }),
     new CopyWebpackPlugin([
-      { from: 'src/assets', to: 'assets' },
+      //{ from: 'src/assets', to: 'assets' },
       { from: 'src/favicon.ico' }
     ])
   ],
+  stats: 'normal',
 
   devServer: {
     contentBase: './build/dist',
     historyApiFallback: true,
-    port: 3000
+    port: 3000,
+    stats: 'normal'
   }
 });
