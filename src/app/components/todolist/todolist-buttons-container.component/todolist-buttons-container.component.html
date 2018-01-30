@@ -1,0 +1,30 @@
+<div
+  class="todolist-buttons-container">
+  <div
+    class="todolist-buttons-container__filters-container">
+    <button
+      class="todolist-buttons-container__button"
+      (click)="allFilterClicked()"
+      [disabled]="isAllFilterOn">
+      All
+    </button>
+    <button
+      class="todolist-buttons-container__button"
+      (click)="activeFilterClicked()"
+      [disabled]="isActiveFilterOn">
+      Active
+    </button>
+    <button
+      class="todolist-buttons-container__button"
+      (click)="completedFilterClicked()"
+      [disabled]="isCompletedFilterOn">
+      Completed
+    </button>
+  </div>
+  <button
+    class="todolist-buttons-container__button"
+    (click)="clearCompletedButtonClicked()"
+    [disabled]="isClearCompletedDisabled">
+    Clear completed
+  </button>
+</div>

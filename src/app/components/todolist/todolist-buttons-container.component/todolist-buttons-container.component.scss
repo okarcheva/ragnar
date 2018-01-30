@@ -1,0 +1,10 @@
+.todolist-buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.todolist-buttons-container__button {
+    height: 28px;
+    padding: 0 16px;
+    font-size: 16px;
+}

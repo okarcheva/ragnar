@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TodolistFilter } from 'app/components/todolist/todolist-enums';
 import { TodolistItem } from 'app/components/todolist/todolist-item.component/todolist-item';
+import { TodolistFilter } from 'app/models/todolist/todolist-enums';
 
 @Injectable()
 export class TodolistService {

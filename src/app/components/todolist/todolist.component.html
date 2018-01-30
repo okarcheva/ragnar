@@ -3,22 +3,8 @@
     ToDo List
   </h1>
 
-  <div class="todolist__input-container">
-    <input 
-      type="text"
-      placeholder="Add item.."
-      class="todolist__input"
-      [(ngModel)]="description"
-    >
-    <button 
-      class="todolist__button"
-      (click)="addButtonClicked()"
-      [disabled]="isAddDisabled"
-    >
-      Add
-    </button>
-  </div>
-
+  <todolist-input-section>    
+  </todolist-input-section>
 
   <div
     class="todolist__items-container">
@@ -26,41 +12,17 @@
       *ngFor="let todoItem of todoListFiltered$ | async"
       class="todolist__item"
       [todolistItem]="todoItem"
-      [onCheckboxChange]="checkboxValueChanged"
-      [onCloseIconClick]="itemCloseIconClicked"
+      (onCheckboxChange)="checkboxValueChanged(todoItem)"
+      (onCloseIconClick)="itemCloseIconClicked(todoItem)"
     ></todolist-item>
   </div>
 
-  <div
-    class="todolist__buttons-container">
-    <div
-      class="todolist__filters-container">
-      <button
-        class="todolist__button"
-        (click)="allFilterClicked()"
-        [disabled]="isAllFilterOn$ | async">
-        All
-      </button>
-      <button
-        class="todolist__button"
-        (click)="activeFilterClicked()"
-        [disabled]="isActiveFilterOn$ | async">
-        Active
-      </button>
-      <button
-        class="todolist__button"
-        (click)="completedFilterClicked()"
-        [disabled]="isCompletedFilterOn$ | async">
-        Completed
-      </button>
-    </div>
-    <button
-      class="todolist__button"
-      (click)="clearCompletedButtonClicked()"
-      [disabled]="isClearCompletedDisabled$ | async">
-      Clear completed
-    </button>
-  </div>
+  <todolist-buttons-container
+    [isAllFilterOn]="isAllFilterOn"
+    [isActiveFilterOn]="isActiveFilterOn"
+    [isCompletedFilterOn]="isCompletedFilterOn"
+  >    
+  </todolist-buttons-container>
 
 </div>
 

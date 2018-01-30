@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAction } from 'app/actions/i-action';
-import { TodolistFilter } from 'app/components/todolist/todolist-enums';
+import { TodolistFilter } from 'app/models/todolist/todolist-enums';
 import { Store } from 'app/store/store';
 
 @Injectable()
@@ -14,9 +14,5 @@ export class AllFilterClickedAction implements IAction {
     todolistStore.filterValue$.next(TodolistFilter.All);
 
     todolistStore.todoListFiltered$.next(todolistStore.todolist$.getValue());
-
-    todolistStore.isAllFilterOn$.next(true);
-    todolistStore.isActiveFilterOn$.next(false);
-    todolistStore.isCompletedFilterOn$.next(false);
   }
 }

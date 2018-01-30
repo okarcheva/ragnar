@@ -9,30 +9,9 @@
     text-align: center;
 }
 
-.todolist__input-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 24px;
-}
-
-.todolist__input {
-    width: 100%;
-    margin-right: 8px;
-    padding: 0 8px;
-    font-size: 16px;
-    line-height: 24px;
-}
-
-.todolist__button {
-    height: 28px;
-    padding: 0 16px;
-    font-size: 16px;
-}
-
 .todolist__items-container {
-    background: $a-color-gray-n1;
     margin-bottom: 24px;
+    background: $a-color-gray-n1;
 }
 
 .todolist__item {
@@ -42,9 +21,3 @@
         border-bottom: 1px solid $a-color-gray-n2;
     }
 }
-
-.todolist__buttons-container {
-    display: flex;
-    justify-content: space-between;
-}
-

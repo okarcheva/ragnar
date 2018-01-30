@@ -1,4 +1,4 @@
-import { TodolistFilter } from './../../components/todolist/todolist-enums';
+import { TodolistFilter } from './../../models/todolist/todolist-enums';
 import { Store } from './../../store/store';
 import { TodolistStore } from './../../store/todolist/todolist-store';
 import { ActiveFilterClickedAction } from './active-filter-clicked.action';

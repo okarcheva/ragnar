@@ -1,0 +1,15 @@
+<div class="todolist-input-section">
+  <input 
+    type="text"
+    placeholder="Add item.."
+    class="todolist-input-section__input"
+    [(ngModel)]="description"
+  >
+  <button 
+    class="todolist-input-section__button"
+    (click)="addButtonClicked()"
+    [disabled]="isAddDisabled"
+  >
+    Add
+  </button>
+</div>
