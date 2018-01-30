@@ -12,8 +12,6 @@
       *ngFor="let todoItem of todoListFiltered$ | async"
       class="todolist__item"
       [todolistItem]="todoItem"
-      (onCheckboxChange)="checkboxValueChanged(todoItem)"
-      (onCloseIconClick)="itemCloseIconClicked(todoItem)"
     ></todolist-item>
   </div>
 
@@ -21,6 +19,7 @@
     [isAllFilterOn]="isAllFilterOn"
     [isActiveFilterOn]="isActiveFilterOn"
     [isCompletedFilterOn]="isCompletedFilterOn"
+    [isClearCompletedDisabled]="isClearCompletedDisabled"
   >    
   </todolist-buttons-container>
 

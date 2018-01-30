@@ -7,5 +7,4 @@ export class TodolistStore {
   readonly todoListFiltered$ = new BehaviorSubject<TodolistItem[]>([]);
   readonly idCounter$ = new BehaviorSubject<number>(0);  
   readonly filterValue$ = new BehaviorSubject<TodolistFilter>(TodolistFilter.All);
-  readonly isClearCompletedDisabled$ = new BehaviorSubject<boolean>(true);
 }

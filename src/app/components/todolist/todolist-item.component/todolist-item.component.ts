@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CheckboxValueChangedAction } from 'app/actions/todolist/checkbox-value-changed.action';
+import { ItemCloseIconClickedAction } from 'app/actions/todolist/item-close-icon-clicked.action';
 import { TodolistItem } from 'app/components/todolist/todolist-item.component/todolist-item';
 
 @Component({
@@ -8,17 +10,18 @@ import { TodolistItem } from 'app/components/todolist/todolist-item.component/to
 })
 export class TodolistItemComponent {
   @Input() todolistItem: TodolistItem;
-  @Output() onCheckboxChange = new EventEmitter<TodolistItem>();
-  @Output() onCloseIconClick = new EventEmitter<TodolistItem>();
 
-  constructor() {}
+  constructor(
+    private checkboxValueChangedAction: CheckboxValueChangedAction,
+    private itemCloseIconClickedAction: ItemCloseIconClickedAction, 
+  ) {}
 
   checkboxValueChanged() {
     this.todolistItem.isChecked = !this.todolistItem.isChecked;
-    this.onCheckboxChange.emit(this.todolistItem);
+    this.checkboxValueChangedAction.execute(this.todolistItem);
   }
 
   closeIconClicked() {
-    this.onCloseIconClick.emit(this.todolistItem);
+    this.itemCloseIconClickedAction.execute(this.todolistItem);
   }
 }

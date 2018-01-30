@@ -1,40 +1,29 @@
 import { Injectable } from '@angular/core';
 import { IDataAction } from 'app/actions/i-data-action';
 import { TodolistItem } from 'app/components/todolist/todolist-item.component/todolist-item';
+import { TodolistService } from 'app/services/todolist.service';
 import { Store } from 'app/store/store';
 
 @Injectable()
 export class CheckboxValueChangedAction implements IDataAction<TodolistItem> {
   constructor(
-    private store: Store
+    private store: Store,
+    private todolistService: TodolistService
   ) {}
 
-  async execute(item: TodolistItem) {
+  async execute(todolistItem: TodolistItem) {
     const todolistStore = this.store.todolistStore;
+    const filterValue = todolistStore.filterValue$.getValue();
 
     let changedItem = todolistStore.todolist$.getValue().find(
-      todoItem => todoItem.id === item.id);
+      todoItem => todoItem.id === todolistItem.id);
     if (changedItem) {
-      changedItem.isChecked = item.isChecked;
-    }
-
-    const isClearCompletedDisabled = this.getIsClearCompletedDisabled(
-      item,
-      todolistStore.todolist$.getValue()
-    );
-
-    todolistStore.isClearCompletedDisabled$.next(isClearCompletedDisabled);
-  }
-
-  getIsClearCompletedDisabled(item: TodolistItem, todolist: TodolistItem[]): boolean {
-    let isClearCompletedDisabled = true;
-
-    if (item.isChecked) {
-      isClearCompletedDisabled = false;
-    } else if (todolist.filter(todolistItem => todolistItem.isChecked).length > 0) {
-      isClearCompletedDisabled = false;
+      changedItem.isChecked = todolistItem.isChecked;
     }
     
-    return isClearCompletedDisabled;
-  }
+    todolistStore.todoListFiltered$.next(
+      todolistStore.todolist$.getValue().filter(
+        item => { return this.todolistService.filterTodolist(filterValue, item); }
+    ));
+  }   
 }

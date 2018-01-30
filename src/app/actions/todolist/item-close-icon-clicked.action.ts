@@ -23,10 +23,5 @@ export class ItemCloseIconClickedAction implements IDataAction<TodolistItem> {
       todolistStore.todolist$.getValue().filter(
         item => { return this.todolistService.filterTodolist(filterValue, item); }
     ));
-
-    const isClearCompletedDisabled = 
-      todolistStore.todolist$.getValue().filter(item => item.isChecked).length > 0 ? false : true;
-
-    todolistStore.isClearCompletedDisabled$.next(isClearCompletedDisabled);
   }
 }

@@ -24,7 +24,5 @@ export class ClearCompletedButtonClickedAction implements IAction {
       todolistStore.todolist$.getValue().filter(
         item => { return this.todolistService.filterTodolist(filterValue, item); }
     ));
-
-    todolistStore.isClearCompletedDisabled$.next(true);
   }
 }
